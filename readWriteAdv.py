@@ -12,13 +12,11 @@ def serializeBinData(filename: str, data: any):
     with open(filename, "wb") as wf:
         serializedBinDataList = []
         for dat in data:
-            serializedBinDataList.append(
-                " ".join(str(bin(ord(da))) for da in dat))
+            serializedBinDataList.append(" ".join(str(bin(ord(da))) for da in dat))
             serializedBinDataList.append("|")
         if serializedBinDataList:
             print("[*] Binary Serialization complete!")
-            serializedDataStream = "".join(
-                data for data in serializedBinDataList)
+            serializedDataStream = "".join(data for data in serializedBinDataList)
             checksum = hashCompute(serializedDataStream)
         else:
             print("[-] Binary Serialization failed!!")
@@ -36,8 +34,7 @@ def deserializeBinData(filename: str):
     with open(filename, "rb") as rf:
         data = rf.read().decode("UTF-8")
         data_stream, checksum = data.rsplit("|", 1)
-        realChecksum = "".join(chr(int(char, 2))
-                               for char in checksum.split(" "))
+        realChecksum = "".join(chr(int(char, 2)) for char in checksum.split(" "))
         data_stream = data_stream.split("|")
         print("[+] Binary file decoded!")
         deserializedBinData = []
@@ -46,10 +43,8 @@ def deserializeBinData(filename: str):
             chars = line.split(" ")
             deserializedChecksumBin.append(" ".join(char for char in chars))
             deserializedChecksumBin.append("|")
-            deserializedBinData.append(
-                "".join(chr(int(char, 2)) for char in chars))
-        deserializedChecksumStr = "".join(
-            binary for binary in deserializedChecksumBin)
+            deserializedBinData.append("".join(chr(int(char, 2)) for char in chars))
+        deserializedChecksumStr = "".join(binary for binary in deserializedChecksumBin)
         deserializedChecksum = hashCompute(deserializedChecksumStr)
         if realChecksum != deserializedChecksum:
             print("[-] Checksum hash verification failed. Data has been tampered!!")
