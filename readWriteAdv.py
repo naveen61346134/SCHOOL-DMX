@@ -56,8 +56,8 @@ def deserializeBinData(filename: str):
     return deserializedBinData
 
 
-serializeBinData("test.bin", ["1:Aaron:20000", "2:Alban:10000",
-                 "3:Naveen:28000", "4:John:30000", "5:Doe:5000"])
+serializeBinData("test.bin", ["1:Tron:20000", "2:Grim:10000",
+                 "3:Joe:28000", "4:John:30000", "5:Doe:5000"])
 
 data = deserializeBinData("test.bin")
 print(data)
